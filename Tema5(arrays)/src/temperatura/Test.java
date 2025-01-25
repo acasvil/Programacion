@@ -5,7 +5,8 @@ import java.util.*;
 public class Test {
 
 	public static void main(String[] args) {
-
+		
+		double tempSeek;
 		boolean flag = false;
 		int opcion;
 		Scanner entrada = new Scanner(System.in);
@@ -26,7 +27,6 @@ public class Test {
 			switch (opcion) {
 
 			case 1:
-				
 				Temperatura.addtemp(temp);
 				break;
 
@@ -49,15 +49,32 @@ public class Test {
 				break;
 
 			case 5:
-
+				
+				System.out.println("¿Qué temperatura deseas buscar?");
+				tempSeek= entrada.nextDouble();
+				if(Temperatura.searchTemp(temp, tempSeek) == -1) {
+					System.out.println("No se ha encontrado la temperatura");
+				}else{
+					System.out.println("La temperatura que buscas está en la posición" + Temperatura.searchTemp(temp, tempSeek));
+				};
+				
+				
 				break;
 
 			case 6:
-
+				
+				System.out.println("¿Qué temperatura deseas borrar?");
+				tempSeek= entrada.nextDouble();
+				if(Temperatura.deleteTemp(temp, tempSeek) == false) {
+					System.out.println("No se ha encontrado la temperatura que buscas");
+				}else {
+					System.out.println("Se ha borrado la temperatura correctamente");
+				}
 				break;
 
 			case 7:
-
+				flag = true;
+				System.out.println("Adios!");
 				break;
 
 			}

@@ -9,7 +9,7 @@ public class Temperatura {
 		
 		double temperatura;
 		System.out.println("¿Que temperatura deseas añadir?");
-		temperatura = entrada.nextInt();
+		temperatura = entrada.nextDouble();
 		temp.add(temperatura);
 		
 	}
@@ -44,6 +44,8 @@ public class Temperatura {
 			}
 		}
 		
+		
+		
 		maxMin[0]=maxTemp;
 		maxMin[1]=minTemp;
 		
@@ -60,6 +62,34 @@ public class Temperatura {
 			System.out.println(i+". " + temp.get(i));
 			
 		}
+		
+		System.out.println();
+	}
+	
+	public static int searchTemp(ArrayList<Double> temp,double seek) {
+		
+		boolean flag = false;
+		int posicion = -1;
+		
+		for(int i = 0; i < temp.size() && !flag ; i++ ){
+			
+			if(temp.get(i) == seek) {
+				flag = true;
+				posicion = i;
+			}
+		}
+		return posicion;	
+	}
+	
+	public static boolean deleteTemp(ArrayList<Double> temp, double seek) {
+		
+		if(searchTemp(temp,seek) == -1) {
+			return false;
+		}else {
+			temp.remove(searchTemp(temp,seek));
+			return true;
+		}
+		
 		
 	}
 	
