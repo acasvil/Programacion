@@ -14,36 +14,32 @@ public class Test {
 		int puntuacion = 0;
 		
 		HashMap<String, Integer> plantilla = new HashMap<String, Integer>();
-		.put("as", 11);
-		baraja.put("tres", 10);
-		baraja.put("sota", 2);
-		baraja.put("caballo", 3);
-		baraja.put("rey", 4);
+		ArrayList<Carta> baraja = new ArrayList<Carta>();
 		
-		ArrayList<Carta> baraja = new ArrayList<Carta>;
+		plantilla.put("as", 11);
+		plantilla.put("tres", 10);
+		plantilla.put("sota", 2);
+		plantilla.put("caballo", 3);
+		plantilla.put("rey", 4);
+		
+		
 		
 		for (int i = 0; i < barajasize; i++) {
 			
 			do {
 				c1 = new Carta();
-			}while(baraja.containsValue(c1.getNumero()));
+			}while(baraja.contains(c1));
 
-			if(c1.getNumero().equalsIgnoreCase("as")) {
-				puntuacion = 11;
-			}else if(c1.getNumero().equalsIgnoreCase("tres")) {
-				puntuacion = 10;
-			}else if(c1.getNumero().equalsIgnoreCase("sota")) {
-				puntuacion = 2;
-			}else if(c1.getNumero().equalsIgnoreCase("caballo")) {
-				puntuacion = 3;
-			}else if(c1.getNumero().equalsIgnoreCase("rey")) {
-				puntuacion = 4;
-			}else puntuacion = 0;
+			if(plantilla.containsKey(c1.getNumero())) {
+				
+				puntuacion+=plantilla.get(c1.getNumero());
+			}
 			
-			baraja.put(c1.getPalo(), puntuacion);
+			baraja.add(c1);
 		}	
 		
-		System.out.println(baraja.keySet());
+		System.out.println(baraja);
+		System.out.println("puntuacion: " + puntuacion);
 		
 //		System.out.println(baraja.toString());
 //		
