@@ -60,7 +60,6 @@ INDEX VERSION 1.134+C:\Users\adria\Desktop\Clases\eclipse-workspace\.metadata\.p
 4286311075.index
 45843814.index
 541677010.index
-3926289436.index
 955515987.index
 1831381231.index
 2940382224.index
