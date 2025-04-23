@@ -25,7 +25,7 @@ public class Ejer5Bol1 {
 		File f3 = new File(f1.getPath(), "Fotografias");
 		File f4 = new File((MisCosas), "Fotografias");
 		f3.renameTo(f4);
-		if()f
+		
 		f3.mkdir();
 		File f5 = new File(f1.getPath(), "Libros");
 		File f6 = new File((MisCosas), "Libros");

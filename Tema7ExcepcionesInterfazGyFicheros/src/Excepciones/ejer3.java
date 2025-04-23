@@ -50,6 +50,8 @@ public class ejer3 {
 	public static void main(String[] args) {
 		
 		double [] prueba = new double [5];
+		String patata;
+		Scanner sc = new Scanner(System.in);
 		
 		try {
 			fill(prueba);
@@ -60,7 +62,13 @@ public class ejer3 {
 			System.out.println(a);
 		}
 		
-		
+		for(int i = 0; i < 10 ; i++) {
+			
+			System.out.println("Introduce datos");
+			patata = sc.next();
+			
+			
+		}
 		
 		show(prueba);
 		

@@ -38,20 +38,30 @@ public abstract class Generador {
 	}
 	
 	public static int getRandomNumber(int min, int max) {
-		
-		int RandomNumber = ((int) (Math.random()*max) + min);
-		
-		return RandomNumber;
+	    return (int) (Math.random() * (max - min + 1)) + min;
 	}
 	
-	public static double getRandomDouble(int min, int max, int decimales) {
+	public static double getRandomDouble(int min, int max) {
 		
-		double RandomNumber = ((Math.random()*max) + min);
-		Math.round((RandomNumber * 100d) / 100d);
-		
-		return RandomNumber;
+		return (double) (Math.random() * (max - min + 1)) + min;
 	}
 	
+	public static String dniGenerator() {
+		
+		String dni = "5";
+		int cuerpo;
+		int nletra;
+		char letra;
+		
+		cuerpo = getRandomNumber(0000000, 9999999);
+		// 65- 90
+		nletra = getRandomNumber(65,90);
+		letra = (char) nletra;
+		
+		dni = dni + cuerpo + letra;
+		
+		return dni;
+	}
 	
 
 }

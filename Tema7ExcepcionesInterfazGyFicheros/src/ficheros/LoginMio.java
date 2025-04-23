@@ -36,7 +36,7 @@ public static void main(String[] args) throws IOException {
 				
 				System.out.println("Introduce tu contraseña");
 				
-				sc
+				
 				
 				break;
 			

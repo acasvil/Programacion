@@ -46,26 +46,30 @@ public class Ejer1Bol2 {
 		f.close();
 	}
 
-	public static void mostrarByBuffer(BufferedReader f) throws IOException {
-
-		String txt = f.readLine();
+	public static void mostrarByBuffer(File f) throws IOException {
+		
+		FileReader fr = new FileReader(f);
+		BufferedReader br = new BufferedReader(fr);
+		String txt = br.readLine();
 		while (txt != null) {
 			System.out.println(txt);
-			txt = f.readLine();
+			txt = br.readLine();
 
 		}
 
 	}
 
-	public static ArrayList<String> mostrarByRet(BufferedReader... f) throws IOException {
-
+	public static ArrayList<String> mostrarByRet(File f) throws IOException {
+		
+		FileReader fr = new FileReader(f);
+		BufferedReader br = new BufferedReader(fr);
+		String txt;
 		ArrayList<String> lineas = new ArrayList<String>();
-		for (BufferedReader fp : f) {
-			String txt;
-			while ((txt = fp.readLine()) != null) {
-				lineas.add(txt + "\n");
+		
+			while ((txt = br.readLine()) != null) {
+				lineas.add(txt);
 			}
-		}
+
 		return lineas;
 
 	}
