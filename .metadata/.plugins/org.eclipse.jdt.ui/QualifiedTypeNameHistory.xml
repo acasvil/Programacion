@@ -23,7 +23,6 @@
     <fullyQualifiedTypeName name="randomizer.Generador"/>
     <fullyQualifiedTypeName name="java.lang.ClassNotFoundException"/>
     <fullyQualifiedTypeName name="java.io.IOException"/>
-    <fullyQualifiedTypeName name="java.io.EOFException"/>
     <fullyQualifiedTypeName name="ficheros.Ejer1Bol2"/>
     <fullyQualifiedTypeName name="java.io.BufferedWriter"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
@@ -46,4 +45,5 @@
     <fullyQualifiedTypeName name="java.io.ObjectOutputStream"/>
     <fullyQualifiedTypeName name="java.io.ObjectInputStream"/>
     <fullyQualifiedTypeName name="java.io.FileInputStream"/>
+    <fullyQualifiedTypeName name="java.io.EOFException"/>
 </qualifiedTypeNameHistroy>

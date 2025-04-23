@@ -21,6 +21,8 @@ import javax.swing.JTable;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Vista extends JFrame {
 
@@ -29,27 +31,11 @@ public class Vista extends JFrame {
 	private JTable table;
     private Controlador controlador; 
 
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Vista frame = new Vista();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	/**
 	 * Create the frame.
 	 */
-	public Vista() {
+	public Vista(Controlador c) {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 750, 500);
 		contentPane = new JPanel();
@@ -72,9 +58,9 @@ public class Vista extends JFrame {
 		lblApellidosopcional.setBounds(23, 83, 231, 40);
 		contentPane.add(lblApellidosopcional);
 		
-		JTextArea apellidosArea = new JTextArea();
-		apellidosArea.setBounds(117, 134, 137, 33);
-		contentPane.add(apellidosArea);
+		JTextArea numeroArea = new JTextArea();
+		numeroArea.setBounds(117, 134, 137, 33);
+		contentPane.add(numeroArea);
 		
 		JLabel lblNumero = new JLabel("Numero: ");
 		lblNumero.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -82,46 +68,52 @@ public class Vista extends JFrame {
 		contentPane.add(lblNumero);
 		
 		JLabel lblNewLabel = new JLabel("DISCLAMER");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 43));
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblNewLabel.setForeground(new Color(255, 0, 0));
-		lblNewLabel.setBounds(23, 244, 357, 57);
+		lblNewLabel.setBounds(23, 257, 231, 28);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblLosBotonesFuncionan = new JLabel("Los botones funcionan teniendo en cuenta  el numero especificado");
-		lblLosBotonesFuncionan.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblLosBotonesFuncionan.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblLosBotonesFuncionan.setForeground(Color.RED);
-		lblLosBotonesFuncionan.setBounds(25, 324, 688, 40);
+		lblLosBotonesFuncionan.setBounds(25, 282, 688, 40);
 		contentPane.add(lblLosBotonesFuncionan);
 		
 		JLabel lblRetExitError = new JLabel("");
-		lblRetExitError.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		lblRetExitError.setBounds(23, 200, 101, 33);
+		lblRetExitError.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblRetExitError.setBounds(23, 192, 344, 53);
 		contentPane.add(lblRetExitError);
 		
-		JTextArea numeroArea = new JTextArea();
-		numeroArea.setBounds(230, 90, 137, 33);
-		contentPane.add(numeroArea);
+		JTextArea apellidosArea = new JTextArea();
+		apellidosArea.setBounds(230, 90, 137, 33);
+		contentPane.add(apellidosArea);
 		
 		JButton btnAgregarContacto = new JButton("Agregar Contacto");
-		btnAgregarContacto.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				String nombre = nombreArea.getText();
-				String apellidos = apellidosArea.getText();
-				try {
-					int numero = Integer.parseInt(numeroArea.getText());
-					controlador.aniadirContacto(nombre, apellidos, numero);
-				}catch(NumberFormatException nfe) {
-					lblRetExitError.setText("¡Solo se pueden introducir numero en el numero!");;
-				}
-				
-				
-				
-				
-			}
+		btnAgregarContacto.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        String nombre = nombreArea.getText();
+		        String apellidos = numeroArea.getText();
+		        if (nombre.isEmpty() || apellidos.isEmpty() || numeroArea.getText().isEmpty()) {
+		            lblRetExitError.setText("¡Completa todos los campos!");
+		            return;
+		        }else {
+		        	try {
+		        		System.out.println(numeroArea.getText().trim());
+			            int numero = Integer.parseInt(numeroArea.getText().trim());
+			            controlador.aniadirContacto(nombre, apellidos, numero);
+			            lblRetExitError.setText("Contacto agregado correctamente.");
+			            nombreArea.setText("");
+				        apellidosArea.setText("");
+				        numeroArea.setText("");
+				        lblRetExitError.setText("Contacto agregador correctamente");
+			        } catch (NumberFormatException nfe) {
+			            lblRetExitError.setText("¡Solo se pueden introducir números en el número!");
+			        }
+			        
+		        }
+		    }
 		});
-		btnAgregarContacto.setBounds(23, 395, 163, 40);
+		btnAgregarContacto.setBounds(23, 333, 163, 40);
 		contentPane.add(btnAgregarContacto);
 		
 		JButton btnEditarContacto = new JButton("Editar Contacto");
@@ -129,7 +121,7 @@ public class Vista extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnEditarContacto.setBounds(207, 395, 163, 40);
+		btnEditarContacto.setBounds(23, 395, 163, 40);
 		contentPane.add(btnEditarContacto);
 		
 		JButton btnBorrarContacto = new JButton("Borrar Contacto");
@@ -137,7 +129,7 @@ public class Vista extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnBorrarContacto.setBounds(390, 395, 163, 40);
+		btnBorrarContacto.setBounds(204, 333, 163, 40);
 		contentPane.add(btnBorrarContacto);
 		
 		
@@ -147,8 +139,27 @@ public class Vista extends JFrame {
 		contentPane.add(table);
 		
 		JButton btnMostrarContactos = new JButton("Mostrar Contactos");
-		btnMostrarContactos.setBounds(563, 395, 163, 40);
+		btnMostrarContactos.setBounds(204, 395, 163, 40);
 		contentPane.add(btnMostrarContactos);
+		
+		JButton btnGuardarCambios = new JButton("Guardar Cambios");
+		btnGuardarCambios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					controlador.guardarCambios();
+					lblRetExitError.setText("Se ha guardado correctamente");
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		btnGuardarCambios.setBounds(376, 395, 163, 40);
+		contentPane.add(btnGuardarCambios);
 		
 		
 	}

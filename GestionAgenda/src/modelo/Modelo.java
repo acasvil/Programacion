@@ -6,29 +6,15 @@ public class Modelo {
 	
 	ArrayList<Contacto> agenda;
 	File f ;
-	boolean comprobador;
 	
 	public Modelo() throws IOException {
 		agenda = new ArrayList<Contacto>();
-		comprobador = false;
 		f = new File("bd");
 	}
 	
 	public void agregarContacto(Contacto c) {
 		agenda.add(c);
-		if(comprobador == false) {
-		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f))) {
-	        oos.writeObject(c);
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-		}else {
-			try (ObjectOutputStream oos = new MiObjectOutputStream(new FileOutputStream(f))) {
-		        oos.writeObject(c);
-		    } catch (IOException e) {
-		        e.printStackTrace();
-		    }
-		}
+		
 	}
 	
 	public ArrayList<Contacto> getContactos(){
@@ -40,14 +26,28 @@ public class Modelo {
 		
 	}
 	
-	public void editarContacto(Contacto cOld, Contacto cNew) throws FileNotFoundException, IOException {
-		try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f))){
-			ois.
-		}
-		
+	public void editarContacto(Contacto cOld, Contacto cNew) throws FileNotFoundException, IOException, ClassNotFoundException {
 		
 		agenda.remove(cOld);
 		agenda.add(cNew);
+		
+	}
+	
+	public void guardar() throws FileNotFoundException, IOException {
+		
+		f.delete();
+		f.createNewFile();
+		try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f))){
+			
+			for(Contacto c : agenda) {
+				
+				oos.writeObject(c);
+				
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
