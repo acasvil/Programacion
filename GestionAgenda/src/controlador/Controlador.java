@@ -1,4 +1,6 @@
 package controlador;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import modelo.Contacto;
 import modelo.Modelo;
@@ -23,7 +25,7 @@ public class Controlador {
 		}
 	}
 	
-	public void editarContacto(String nombre, String apellidos, int numero) {
+	public void editarContacto(String nombre, String apellidos, int numero) throws FileNotFoundException, IOException, ClassNotFoundException {
 		
 		Contacto cNew = new Contacto (nombre, apellidos, numero);
 		
@@ -47,6 +49,10 @@ public class Controlador {
 		Contacto c = new Contacto (nombre, apellidos, numero);
 		agenda.agregarContacto(c);
 
+	}
+	
+	public void guardarCambios() throws FileNotFoundException, IOException {
+		agenda.guardar();
 	}
 	
 }
