@@ -124,7 +124,7 @@ public class Vista extends JFrame {
 		btnEditarContacto.setBounds(23, 395, 163, 40);
 		contentPane.add(btnEditarContacto);
 		
-		JButton btnBorrarContacto = new JButton("Borrar Contacto");
+		JButton btnBorrarContacto = new JButton("Borrar Cont acto");
 		btnBorrarContacto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
